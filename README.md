@@ -4,4 +4,4 @@ The p2p system is a Napster-like conceptual implementation. The peers request th
 
 Single request from a server(for example server A) is handled by a random bootstrap server which responds by giving the server with the right database fragment.
 
-![single_requst](https://github.com/tedywond/azi_bot_project/blob/master/images/singleRequest.png)
+![single_requst](https://github.com/abelteketel/-Peer-to-peer-file-sharing-system/blob/master/images/singleRequest.PNG)
