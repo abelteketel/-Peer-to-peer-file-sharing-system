@@ -1,5 +1,8 @@
+#bootstrap_servers = {0:"serv0",1:"serv1",2:"serv2",3:"serv3"}
+
 import socket
 import random
+import peer
 
 class client(object):
 	def __init__(self,port=12345):
@@ -12,6 +15,27 @@ class client(object):
 		return self.bootstrap_servers[random.randint(1,len(self.bootstrap_servers))-1];
 
 	
+	def request_peer_address(self,peer_req_handler,name):
+		s = self.connect_to(address=peer_req_handler)
+		assert s is not None
+		try:
+			s.send('peer_request')
+			print s.recv(1024), 'peer_request'
+			s.send(name)
+			final_peer = s.recv(1024)
+
+		except:
+			import logging
+			logging.basicConfig(filename='fragment_request.log',level=logging.DEBUG)
+			logging.info('Error')
+		finally:
+			s.close()
+
+		p = peer.peers()
+		p.request_file(name,final_peer)
+
+
+
 	def request_fragment_handler_address(self,name):
 		s=self.connect_to()
 		assert s is not None
@@ -26,7 +50,7 @@ class client(object):
 			logging.info('Error')
 		finally:
 			s.close()
-
+		self.request_peer_address(peer_req_handler_server,name)
 
 
 	def connect_to(self,address=None,port=None):
