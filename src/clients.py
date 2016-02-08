@@ -75,11 +75,3 @@ class client(object):
 if __name__=="__main__":
 	c = client()
 	c.request_fragment_handler_address(raw_input("ENTER FILE NAME: "))
-		
-
-
-
-
-
-
-
